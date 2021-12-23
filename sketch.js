@@ -1,195 +1,88 @@
-
-let tree;
-let pumpkin;
-let skeleton; 
-let leaves; 
 let grass; 
-let ground; 
-//img
-let pumpkintexture; 
-let treetexture; 
-let leavestexture; 
+let bug;
+let snail;
+let grasshopper;
+let buzz;
+let circleX = 100; 
+let house;
+let decoration; 
 
 function preload(){
-  tree = loadModel('treetoptrunkex1.obj');
-  leaves = loadModel('leavesyep.obj')
-  pumpkin = loadModel('pumpkin.obj');
-  grass = loadModel('uploads_files_2616453_grass.obj');
-  ground = loadModel('untitled.obj');
-  tree1 = loadModel('tree (1).obj');
-  pumpkintexture = loadImage('Pumpkin_vcols.jpg');
-  treetexture = loadImage('bark.jpg'); 
-  leavestexture = loadImage('JA02_Leaf03Back_dif_au.png');
-  skeleton = loadImage('giphy (8).gif');
-
+  song = loadSound('stranger-than-fiction-8383.mp3')
 }
 
 function setup() {
-  createCanvas(windowWidth, windowHeight,WEBGL);
+  createCanvas(windowWidth, windowHeight);
+  grass = loadImage("grass-6110426_960_720.png"); 
+  bug = loadImage("bug.gif");
+  snail = loadImage("snail.gif");
+  grasshopper = loadImage("buggy.gif"); 
+  buzz = loadImage("buzz whoa.gif"); 
+  house = loadImage("giphy (5).gif");
+  decoration = loadImage("giphy (16).gif"); 
+  song.loop();
   
 }
 
-function draw() {
-  background(250, 166, 62);
-//let dirX = (mouseX / width - 0.5) * 2;
-  //let dirY = (mouseY / height - 0.5) * 2;
-  
-   var color1 = color(255, 204, 102);
-  var color2 = color(255, 0, 0);
-  
-  //directionalLight(250, 250, 250, -1);
-  noStroke()
+function mousePressed() {
+  if (song.isPlaying()) {
+    // .isPlaying() returns a boolean
+    song.pause(); // .play() will resume from .pause() position
+    background(255, 0, 0);
+  } else {
+    song.play();
+    background(0, 255, 0);
+  }
+}
 
-  //camera
-//	var x = map(mouseX, 0, width, -200, 200);
-//	var y = map(mouseY, 0, height, -200, 200);
-//	camera(0, 0, 200, x, y, 0, 0, 1, 0);
-		
-  
-  //ground
-  push();
-  translate(0, 90, 200);
-  rotateY( frameCount * 0.01);
-  scale(50); 
-  fill(95, 125, 64);
-  model(ground)
-  pop();
+function draw() {
+  background(232, 140, 49);
+  noStroke()
   
   //grass
-  push();
-  translate(0, 95, 200);
-  rotateY(frameCount * 0.01);
-  rotateX(-2.95);
-  scale(40); 
-  fill(69, 99, 63);
-  model(grass)
-  pop();
+ // image(grass, 0,-650,windowWidth+800, windowHeight+800)
   
-  push();
-  translate(190, 95, 200);
-  rotateY(frameCount * 0.01);
-  rotateX(-2.95);
-  scale(40); 
-  fill(69, 99, 63);
-  model(grass)
-  pop();
+  //ground
   
-  push();
-  translate(-190, 95, 200);
-  rotateY(frameCount * 0.01);
-  rotateX(-2.95);
-  scale(40); 
-  fill(69, 99, 63);
-  model(grass)
-  pop();
+  fill(117, 95, 34)
+  rect(0,500,windowWidth+800, windowHeight+200)
   
-  push();
-  translate(200, 95, 400);
-  rotateY(frameCount * 0.01);
-  rotateX(-2.95);
-  scale(40); 
-  fill(69, 99, 63);
-  model(grass)
-  pop();
+  //house2
+ // image(house,-100,-350,950,950)
   
-  push();
-  translate(-300, 95, 600);
-  rotateY(frameCount * 0.01);
-  rotateX(-2.95);
-  scale(40); 
-  fill(69, 99, 63);
-  model(grass)
-  pop();
+     for (var x = 0; x < width; x = x + random(800, 800)) {
+    image(house, -100 + x, -125, 650, 650);
+  }
+  //grass
+  image(grass, 0,-650,windowWidth+800, windowHeight+800)
   
-  //pumpkin
-  push();
-  translate(-20, 78, 200);
-  rotateY(frameCount * 0.01);
-  rotateX(-2.95);
-  scale(100); 
-  //fill(69, 99, 63);
-  texture(pumpkintexture);
-  model(pumpkin)
-  pop();
+    //ground
   
-  push();
-  translate(60, 76, 650);
-  rotateY(frameCount * 0.01);
-  rotateX(-2.95);
-  scale(60); 
-  //fill(69, 99, 63);
-  texture(pumpkintexture);
-  model(pumpkin)
-  pop();
+  fill(117, 95, 34)
+  rect(0,500,windowWidth+800, windowHeight+200)
   
-  push();
-  translate(-60, 76, 500);
-  rotateY(frameCount * 0.01);
-  rotateX(-2.95);
-  scale(130); 
-  //fill(69, 99, 63);
-  texture(pumpkintexture);
-  model(pumpkin)
-  pop();
+     for (var x = 0; x < width; x = x + random(1000, 1000)) {
+    image(house, -50 + x, -350, 950, 950);
+  }
   
-  //tree
+  //decorations
+   for (var x = 0; x < width; x = x + random(500, 500)) {
+    image(decoration, -50 + x, 0, 500, 500);
+  }
   
-  push();
-  translate(0, 95, 500);
-  rotateY(frameCount * 0.01);
-  rotateX(-3.20);
-  scale(25000); 
-  //fill(69, 99, 63);
-  //texture(pumpkintexture);
-  //texture(tree);
-  fill(92, 61, 18);
-  model(tree)
-  texture(leavestexture)
-  model(leaves)
-  pop();
+ //ant
+  image(bug,200,400,250, 250)
   
-  //tree
+  //grasshopper
   
-  push();
-  translate(200, 95, 100);
-  rotateY(frameCount * 0.01);
-  rotateX(-3.20);
-  scale(25000); 
-  //fill(69, 99, 63);
-  //texture(pumpkintexture);
-  //texture(tree);
-  fill(92, 61, 18);
-  model(tree)
-  texture(leavestexture)
-  model(leaves)
-  pop();
-
-  //tree
-  
-  push();
-  translate(-300,95, 2);
-  rotateY(frameCount * 0.01);
-  rotateX(-3.20);
-  scale(25000); 
-  //fill(69, 99, 63);
-  //texture(pumpkintexture);
-  //texture(tree);
-  fill(100, 61, 18);
-  model(tree)
-  texture(leavestexture)
-  model(leaves)
-  pop();
-  
-  //skeleton
-  
-  translate(-240, -7, 385);
-  texture(skeleton);
-  push();
-  scale(3);
-//  rotateY(frameCount * 0.01);
-  plane(70);
-  pop();
-
+  image(grasshopper, 800, 0, 800,800);
   
   
+  //buzz
+  image(buzz,mouseX, mouseY)
+  
+  //grassfront
+  image(grass, 0,-300,windowWidth+800, windowHeight+800)
+  
+ 
 }
